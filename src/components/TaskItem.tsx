@@ -3,9 +3,10 @@ import type { Task } from "../types/task";
 interface TaskItemProps {
   task: Task;
   onDelete: (id: string) => void;
+  onToggleComplete: (id: string) => void;
 }
 
-function TaskItem({ task, onDelete }: TaskItemProps) {
+function TaskItem({ task, onDelete, onToggleComplete }: TaskItemProps) {
   const isCompleted = task.status === "completed";
 
   return (
@@ -34,6 +35,18 @@ function TaskItem({ task, onDelete }: TaskItemProps) {
         >
           {task.status}
         </span>
+
+        <button
+          type="button"
+          onClick={() => onToggleComplete(task.id)}
+          className={`text-xs font-medium px-2 py-1 border rounded transition-colors ${
+            isCompleted
+              ? "bg-gray-50 text-gray-700 border-gray-300 hover:bg-gray-100"
+              : "bg-green-50 text-green-700 border-green-300 hover:bg-green-100"
+          }`}
+        >
+          {isCompleted ? "Mark Pending" : "Complete"}
+        </button>
 
         <button
           type="button"

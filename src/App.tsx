@@ -15,13 +15,31 @@ function App() {
     );
   };
 
+  const handleToggleComplete = (idToToggle: string) => {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) => {
+        if (task.id === idToToggle) {
+          return {
+            ...task,
+            status: task.status === "completed" ? "pending" : "completed",
+          };
+        }
+        return task;
+      })
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center py-10 px-4">
       <div className="w-full max-w-xl">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">
           Personal Task Dashboard
         </h1>
-        <TaskList tasks={tasks} onDelete={handleDeleteTask} />
+        <TaskList
+          tasks={tasks}
+          onDelete={handleDeleteTask}
+          onToggleComplete={handleToggleComplete}
+        />
       </div>
     </div>
   );
