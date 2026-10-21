@@ -11,6 +11,8 @@ function App() {
     { id: "3", title: "Schedule team meeting", status: "pending" },
   ]);
 
+  const pendingCount = tasks.filter((task) => task.status === "pending").length;
+
   const handleAddTask = (title: string) => {
     const trimmedTitle = title.trim();
     if (!trimmedTitle) {
@@ -49,10 +51,17 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center py-10 px-4">
       <div className="w-full max-w-xl">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">
-          Personal Task Dashboard
-        </h1>
+        <header className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl font-bold text-gray-800">
+            Personal Task Dashboard
+          </h1>
+          <span className="text-sm font-medium bg-blue-100 text-blue-800 px-3 py-1 rounded-full border border-blue-200">
+            {pendingCount} pending {pendingCount === 1 ? "task" : "tasks"}
+          </span>
+        </header>
+
         <AddTaskForm onAddTask={handleAddTask} />
+
         <TaskList
           tasks={tasks}
           onDelete={handleDeleteTask}
