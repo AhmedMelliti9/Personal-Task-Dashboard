@@ -5,11 +5,7 @@ import AddTaskForm from "./components/AddTaskForm";
 import { generateId } from "./utils/generateId";
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>([
-    { id: "1", title: "Review client proposal", status: "pending" },
-    { id: "2", title: "Send weekly report", status: "completed" },
-    { id: "3", title: "Schedule team meeting", status: "pending" },
-  ]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   const pendingCount = tasks.filter((task) => task.status === "pending").length;
 

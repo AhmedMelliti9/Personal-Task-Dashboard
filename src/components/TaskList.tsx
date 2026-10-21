@@ -8,6 +8,16 @@ interface TaskListProps {
 }
 
 function TaskList({ tasks, onDelete, onToggleComplete }: TaskListProps) {
+  if (tasks.length === 0) {
+    return (
+      <div className="text-center py-10 px-4 bg-white rounded-lg border border-dashed border-gray-300">
+        <p className="text-gray-500 text-base">
+          No tasks yet. Add a task above to get started!
+        </p>
+      </div>
+    );
+  }
+
   return (
     <ul className="flex flex-col gap-3">
       {tasks.map((task) => (
