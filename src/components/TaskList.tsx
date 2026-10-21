@@ -3,13 +3,14 @@ import TaskItem from "./TaskItem";
 
 interface TaskListProps {
   tasks: Task[];
+  onDelete: (id: string) => void;
 }
 
-function TaskList({ tasks }: TaskListProps) {
+function TaskList({ tasks, onDelete }: TaskListProps) {
   return (
     <ul className="flex flex-col gap-3">
       {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} />
+        <TaskItem key={task.id} task={task} onDelete={onDelete} />
       ))}
     </ul>
   );
