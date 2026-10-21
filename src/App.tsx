@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { Task } from "./types/task";
 import TaskList from "./components/TaskList";
+import AddTaskForm from "./components/AddTaskForm";
+import { generateId } from "./utils/generateId";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([
@@ -8,6 +10,21 @@ function App() {
     { id: "2", title: "Send weekly report", status: "completed" },
     { id: "3", title: "Schedule team meeting", status: "pending" },
   ]);
+
+  const handleAddTask = (title: string) => {
+    const trimmedTitle = title.trim();
+    if (!trimmedTitle) {
+      return;
+    }
+
+    const newTask: Task = {
+      id: generateId(),
+      title: trimmedTitle,
+      status: "pending",
+    };
+
+    setTasks((currentTasks) => [...currentTasks, newTask]);
+  };
 
   const handleDeleteTask = (idToDelete: string) => {
     setTasks((currentTasks) =>
@@ -35,6 +52,7 @@ function App() {
         <h1 className="text-2xl font-bold text-gray-800 mb-6">
           Personal Task Dashboard
         </h1>
+        <AddTaskForm onAddTask={handleAddTask} />
         <TaskList
           tasks={tasks}
           onDelete={handleDeleteTask}
